@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_05_043947) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_05_083634) do
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.string "subject"
+    t.integer "course_number"
+    t.text "description"
+    t.integer "credits"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "instructors", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "department"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "listings", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -19,6 +38,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_05_043947) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.decimal "rating"
+    t.integer "user_id", null: false
+    t.string "reviewable_type", null: false
+    t.integer "reviewable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,4 +79,5 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_05_043947) do
   end
 
   add_foreign_key "listings", "users"
+  add_foreign_key "reviews", "users"
 end
