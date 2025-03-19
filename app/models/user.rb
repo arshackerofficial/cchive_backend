@@ -7,5 +7,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
+  validates :username, presence: true, uniqueness: { case_sensitive: false }
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+
   has_many :listings
+  has_one :tutor_profile
 end

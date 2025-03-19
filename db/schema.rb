@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_05_083634) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_17_231225) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "tutor_profile_id", null: false
+    t.integer "student_id", null: false
+    t.datetime "appointment_time"
+    t.integer "status"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tutor_profile_id"], name: "index_appointments_on_tutor_profile_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.string "subject"
@@ -34,7 +48,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_05_083634) do
     t.string "title"
     t.text "description"
     t.decimal "price", precision: 10, scale: 2
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_listings_on_user_id"
@@ -43,13 +57,21 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_05_083634) do
   create_table "reviews", force: :cascade do |t|
     t.text "content"
     t.decimal "rating"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "reviewable_type", null: false
-    t.integer "reviewable_id", null: false
+    t.bigint "reviewable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "tutor_profiles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "subjects", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tutor_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -78,6 +100,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_05_083634) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "appointments", "tutor_profiles"
+  add_foreign_key "appointments", "users", column: "student_id"
   add_foreign_key "listings", "users"
   add_foreign_key "reviews", "users"
+  add_foreign_key "tutor_profiles", "users"
 end

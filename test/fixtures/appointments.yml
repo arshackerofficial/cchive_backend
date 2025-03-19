@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tutor_profile: one
+  student: one
+  appointment_time: 2025-03-17 16:12:25
+  status: 1
+  notes: MyText
+
+two:
+  tutor_profile: two
+  student: two
+  appointment_time: 2025-03-17 16:12:25
+  status: 1
+  notes: MyText
