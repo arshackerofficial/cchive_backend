@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_17_231225) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_19_150434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,7 +18,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_17_231225) do
     t.bigint "tutor_profile_id", null: false
     t.integer "student_id", null: false
     t.datetime "appointment_time"
-    t.integer "status"
+    t.integer "status", default: 0
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
