@@ -14,4 +14,10 @@ class User < ActiveRecord::Base
   has_many :listings
   has_one :tutor_profile
   has_many :student_appointments, class_name: "Appointment", foreign_key: "student_id"
+
+  has_many :created_study_groups, class_name: "StudyGroup", foreign_key: "creator_id"
+  has_many :study_group_memberships
+  has_many :study_groups, through: :study_group_memberships
+
+  has_many :messages
 end

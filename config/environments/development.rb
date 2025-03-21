@@ -75,5 +75,6 @@ Rails.application.configure do
 
 
   config.hosts << /.*\.ngrok-free\.app/
-
+  config.action_cable.url = "ws://localhost:3000/cable"
+  config.action_cable.disable_request_forgery_protection = true
 end

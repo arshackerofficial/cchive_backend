@@ -11,3 +11,4 @@ class CreateAppointments < ActiveRecord::Migration[7.2]
     end
     add_foreign_key :appointments, :users, column: :student_id
   end
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_19_150434) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_21_003420) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_19_150434) do
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "study_group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["study_group_id"], name: "index_messages_on_study_group_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text "content"
     t.decimal "rating"
@@ -64,6 +74,23 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_19_150434) do
     t.datetime "updated_at", null: false
     t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "study_group_memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "study_group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["study_group_id"], name: "index_study_group_memberships_on_study_group_id"
+    t.index ["user_id"], name: "index_study_group_memberships_on_user_id"
+  end
+
+  create_table "study_groups", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tutor_profiles", force: :cascade do |t|
@@ -103,6 +130,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_19_150434) do
   add_foreign_key "appointments", "tutor_profiles"
   add_foreign_key "appointments", "users", column: "student_id"
   add_foreign_key "listings", "users"
+  add_foreign_key "messages", "study_groups"
+  add_foreign_key "messages", "users"
   add_foreign_key "reviews", "users"
+  add_foreign_key "study_group_memberships", "study_groups"
+  add_foreign_key "study_group_memberships", "users"
+  add_foreign_key "study_groups", "users", column: "creator_id"
   add_foreign_key "tutor_profiles", "users"
 end
