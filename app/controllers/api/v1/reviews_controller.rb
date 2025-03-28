@@ -1,6 +1,4 @@
 class Api::V1::ReviewsController < ApplicationController
-
-
     before_action :authenticate_api_v1_user!
 
     def create

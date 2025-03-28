@@ -14,6 +14,9 @@ Rails.application.routes.draw do
       resources :instructors do
         resources :reviews, module: :instructors
       end
+      resources :study_groups do
+        resources :messages
+      end
     end
   end
 end
