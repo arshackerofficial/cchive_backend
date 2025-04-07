@@ -1,0 +1,17 @@
+<p>Hey <%= @tutor.first_name %>,</p>
+
+<p><%= @student.first_name %> just requested a tutoring session with you through CCHive.</p>
+
+<p><strong>Requested Time:</strong> <%= @appointment.appointment_time.strftime("%A, %B %d at %I:%M %p") %></p>
+
+<% if @appointment.notes.present? %>
+  <p><strong>Notes:</strong> <%= @appointment.notes %></p>
+<% end %>
+
+<hr>
+
+<p>If you're available, just reply to this email and connect directly!</p>
+
+<p>If you're not, no worries — you can ignore this message.</p>
+
+<p>Thanks for being part of the tutoring community 🙌</p>

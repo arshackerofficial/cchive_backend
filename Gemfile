@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "active_model_serializers", "~> 0.10.0"
+gem "letter_opener"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.2", ">= 7.2.2.1"

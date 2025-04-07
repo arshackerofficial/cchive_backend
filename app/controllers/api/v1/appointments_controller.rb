@@ -6,6 +6,7 @@ class Api::V1::AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params.merge(student_id: current_api_v1_user.id))
     if @appointment.save
+      AppointmentMailer.notify_tutor(@appointment).deliver_later
       render json: @appointment, status: :created
     else
       render json: @appointment.errors, status: :unprocessable_entity

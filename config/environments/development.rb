@@ -77,4 +77,7 @@ Rails.application.configure do
   config.hosts << /.*\.ngrok-free\.app/
   config.action_cable.url = "ws://localhost:3000/cable"
   config.action_cable.disable_request_forgery_protection = true
+
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 end
