@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :tutor_profiles, only: [ :index, :create ]
       get "tutor_profile", to: "tutor_profiles#my_tutor_profile"
       resources :users, only: [ :index ]
+      get "users/:username", to: "users#show_by_username"
+
       resources :appointments
       resources :listings
       resources :courses do
