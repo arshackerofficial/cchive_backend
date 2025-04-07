@@ -2,7 +2,7 @@ class Api::V1::Instructors::ReviewsController < Api::V1::ReviewsController
     before_action :set_reviewable
 
     def index
-        render json: @reviewable.reviews, status: :ok
+        render json: @reviewable.reviews, status: :ok, each_serializer: ReviewSerializer
     end
 
     private
