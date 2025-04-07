@@ -1,4 +1,8 @@
 class Api::V1::StudyGroupsController < ApplicationController
+  def index
+    render json: StudyGroup.all, status: :ok
+  end
+
   def create
     @study_group = current_api_v1_user.created_study_groups.build(study_group_params)
     if @study_group.save

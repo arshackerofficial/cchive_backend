@@ -13,7 +13,15 @@ module ApplicationCable
     private
     def find_verified_user
       uid = request.params[:uid]
-      User.where(uid: uid)
+      client = request.params[:client]
+      token = request.params[:'access-token']
+
+      user = User.find_by(uid: uid)
+      if user && user.valid_token?(token, client)
+        user
+      else
+        reject_unauthorized_connection
+      end
     end
   end
 end

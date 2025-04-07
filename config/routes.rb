@@ -16,7 +16,8 @@ Rails.application.routes.draw do
         resources :reviews, module: :instructors
       end
       resources :study_groups do
-        resources :messages
+        resources :memberships, controller: "study_group_memberships", only: [ :index, :create, :destroy ]
+        resources :messages, only: [ :index, :create ]
       end
     end
   end
