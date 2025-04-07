@@ -1,11 +1,10 @@
 class Api::V1::ListingsController < ApplicationController
-    #before_action :authenticate_api_v1_user!
+    # before_action :authenticate_api_v1_user!
     def index
         render json: Listing.all
     end
 
     def create
-        pp current_api_v1_user
         @listing = current_api_v1_user.listings.build(listing_params)
         if @listing.save
             render json: @listing, status: :created
