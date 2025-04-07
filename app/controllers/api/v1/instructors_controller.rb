@@ -1,6 +1,6 @@
 class Api::V1::InstructorsController < ApplicationController
   def index
-    render json: Instructor.all, status: :ok
+    render json: Instructor.all, each_serializer: InstructorSerializer
   end
 
   def show
