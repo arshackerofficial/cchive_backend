@@ -3,9 +3,10 @@ class Api::V1::MessagesController < ApplicationController
   before_action :set_study_group
 
   def index
-    @messages = @study_group.messages.order(created_at: :asc)
-    render json: @messages, status: :ok
+    messages = @study_group.messages.order(created_at: :asc)
+    render json: messages, each_serializer: MessageSerializer
   end
+
 
   def create
     @message = @study_group.messages.new(

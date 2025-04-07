@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for "User", at: "auth"
       resources :tutor_profiles, only: [ :index, :create ]
       get "tutor_profile", to: "tutor_profiles#my_tutor_profile"
+      resources :users, only: [ :index ]
       resources :appointments
       resources :listings
       resources :courses do
