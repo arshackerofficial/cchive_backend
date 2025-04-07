@@ -5,6 +5,6 @@ class Api::V1::UsersController < ApplicationController
 
   def show_by_username
     user = User.find_by!(username: params[:username])
-    render json: UserSerializer.new(user)
+    render json: user
   end
 end
