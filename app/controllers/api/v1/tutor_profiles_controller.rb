@@ -10,9 +10,19 @@ class Api::V1::TutorProfilesController < ApplicationController
     if @tutor_profile.save
       render json: @tutor_profile, status: :created
     else
-      rendder json: @tutor_profile.errors, status: :unprocessable_entity
+      render json: @tutor_profile.errors, status: :unprocessable_entity
     end
   end
+
+  def my_tutor_profile
+    profile = current_api_v1_user.tutor_profile
+    if profile
+      render json: profile
+    else
+      render json: {}, status: :not_found
+    end
+  end
+
 
   private
   def tutor_profile_params
