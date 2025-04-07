@@ -17,7 +17,7 @@ class Api::V1::TutorProfilesController < ApplicationController
   def my_tutor_profile
     profile = current_api_v1_user.tutor_profile
     if profile
-      render json: profile
+      render json: profile, serializer: TutorProfileSerializer
     else
       render json: {}, status: :not_found
     end

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       mount_devise_token_auth_for "User", at: "auth"
-      resources :tutor_profilesn, only: [ :index, :create ]
+      resources :tutor_profiles, only: [ :index, :create ]
       get "tutor_profile", to: "tutor_profiles#my_tutor_profile"
       resources :appointments
       resources :listings
