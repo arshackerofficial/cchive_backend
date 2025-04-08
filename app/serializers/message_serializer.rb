@@ -1,8 +1,8 @@
 # app/serializers/message_serializer.rb
 class MessageSerializer < ActiveModel::Serializer
-  attributes :id, :content, :username, :created_at
+  attributes :id, :content, :full_name, :created_at
 
-  def username
-    object.user.username
+  def full_name
+    object.user.last_name + " " + object.user.first_name
   end
 end
